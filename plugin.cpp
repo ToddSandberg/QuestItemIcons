@@ -1,10 +1,8 @@
-#include "include/detail/SimpleIni.h"
 #include "include/LookupConfigs.h"
-#include "filefetcher.hpp"
 
 // string[] function FetchConfigs() global native
 std::vector<std::string> FetchConfigs(RE::StaticFunctionTag *) {
-    std::vector<std::string> files = filefetcher::get_configs(R"(Data\)", "_ITM");
+    std::vector<std::string> files = clib_util::distribution::get_configs(R"(Data\)", "_ITM");
     std::vector<std::string> configs;
 
     if (files.empty()) {

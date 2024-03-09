@@ -1,6 +1,7 @@
 # It's recommended to set a minimum CMake version.
 # If you use CMake features from higher versions, update this to match.
 cmake_minimum_required(VERSION 3.21)
+include("cmake/common.cmake")
 
 # Set your project name. This will be the name of your SKSE .dll file.
 project(QuestItemMarkers VERSION 0.0.1 LANGUAGES CXX)
@@ -29,11 +30,22 @@ endif()
 
 # Otherwise, you can set OUTPUT_FOLDER to any place you'd like :)
 # set(OUTPUT_FOLDER "C:/path/to/any/folder")
+# ---- Dependencies ----
+find_path(MERGEMAPPER_INCLUDE_DIRS "MergeMapperPluginAPI.h")
+find_path(CLIB_UTIL_INCLUDE_DIRS "ClibUtil/utils.hpp")
 
 # Setup your SKSE plugin as an SKSE plugin!
 find_package(CommonLibSSE CONFIG REQUIRED)
 add_commonlibsse_plugin(${PROJECT_NAME} SOURCES plugin.cpp) # <--- specifies plugin.cpp
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23) # <--- use C++23 standard
+target_include_directories(
+	${PROJECT_NAME}
+	PRIVATE
+		${CMAKE_CURRENT_BINARY_DIR}/include
+		${CMAKE_CURRENT_SOURCE_DIR}/include
+		${MERGEMAPPER_INCLUDE_DIRS}
+		${CLIB_UTIL_INCLUDE_DIRS}
+)
 target_precompile_headers(${PROJECT_NAME} PRIVATE PCH.h) # <--- PCH.h is required!
 
 # When your SKSE .dll is compiled, this will automatically copy the .dll into your mods folder.

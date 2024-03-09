@@ -3,9 +3,7 @@
 #include <filesystem>
 #include <variant>
 
-// This is basically ripped from po3 CLibUtil :P
-// https://github.com/powerof3/CLibUtil/blob/master/include/CLIBUtil/distribution.hpp
-// TODO move to that library
+// SHOULD USE CLIBUTIL INSTEAD IF IT WORKS
 namespace filefetcher {
     inline std::vector<std::string> get_configs(std::string_view a_folder, std::string_view a_suffix = ""sv,
                                                 std::string_view a_extension = ".ini"sv) {
