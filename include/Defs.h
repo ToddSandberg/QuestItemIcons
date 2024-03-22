@@ -1,5 +1,6 @@
 #pragma once
 
+// TODO figure out what record should be for this mod
 // Record = FormOrEditorID|StringFilters|RawFormFilters|LevelFilters|Traits|IdxOrCount|Chance
 
 using FormModPair = std::pair<std::optional<RE::FormID>,    // formID
