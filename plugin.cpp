@@ -51,7 +51,7 @@ std::vector<std::string> FetchConfigs(RE::StaticFunctionTag *) {
                         convertedLine = recordString;
                     }
 
-                    configs.push_back(std::format("{}={}", key.pItem, entry));
+                    configs.push_back(std::format("{}={}", key.pItem, convertedLine));
                 } catch (...) {
                     RE::ConsoleLog::GetSingleton()->Print("Failed to parse entry");
                 }
