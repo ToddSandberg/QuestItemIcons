@@ -38,14 +38,19 @@ namespace LookupForms {
                                                     a_editorID);
                     }
                 }
+            } else {*/
+            RE::TESForm* form = RE::TESForm::LookupByEditorID(a_editorID);
+            if (!form) {
+                RE::ConsoleLog::GetSingleton()->Print(std::format("{} FAIL - editorID doesn't exist", a_editorID).c_str());
             } else {
-                form = RE::TESForm::LookupByEditorID(a_editorID);
-                if (!form) {
-                    buffered_logger::error("\t[{}] {} FAIL - editorID doesn't exist", path, a_editorID);
-                } else {
-                    return a_form->GetFormID() & 0x00FFFFFF;
-                }
-            }*/
+                std::string formIdAsString = std::to_string(form->GetFormID());
+                RE::TESFile* file = form->GetFile();
+                std::string_view modName = file->GetFilename();
+                RE::ConsoleLog::GetSingleton()->Print(std::format("modName of editorID: {}", modName).c_str());
+                // TODO get the modName so this works with mods
+                return std::format("{}~{}", formIdAsString, "Skyrim.esm");
+            }
+            //}
         }
         return "";
     }
